@@ -80,7 +80,7 @@ namespace SRM_Connectivity_of_graphs
             return result;
         }
 
-        public static int[,] BooleanTransformation(this int[,] matrix)
+        public static int[,] BooleanTransform(this int[,] matrix)
         {
             int sizeX = matrix.GetLength(0);
             int sizeY = matrix.GetLength(1);
@@ -113,7 +113,7 @@ namespace SRM_Connectivity_of_graphs
             return result;
         }
 
-        public static int[,] ReachabilityMatrix(this int[,] matrix)
+        public static int[,] GetReachabilityMatrix(int[,] matrix)
         {
             int size = matrix.GetLength(0);
             int[,] reachabilityMatrix = IdentityMatrix(matrix);
@@ -134,18 +134,18 @@ namespace SRM_Connectivity_of_graphs
                 }
             }
 
-            MatrixExtension.SeparateStrings();
+            SeparateStrings();
 
             Console.WriteLine("Матриця досяжностi (перед булевою трансформацiєю):".Pastel("#F8DDFA"));
             reachabilityMatrix.DrawMatrixInConsole();
             Console.WriteLine();
 
-            reachabilityMatrix.BooleanTransformation();
+            reachabilityMatrix.BooleanTransform();
 
             return reachabilityMatrix;
         }
 
-        public static int[,] ReachabilityMatrixShort(this int[,] matrix)
+        public static int[,] GetReachabilityMatrixShort(int[,] matrix)
         {
             int size = matrix.GetLength(0);
             int[,] identityMatrix = IdentityMatrix(matrix);
@@ -162,7 +162,7 @@ namespace SRM_Connectivity_of_graphs
             reachabilityMatrix.DrawMatrixInConsole();
             Console.WriteLine();
 
-            reachabilityMatrix.BooleanTransformation();
+            reachabilityMatrix.BooleanTransform();
 
             return reachabilityMatrix;
         }
@@ -180,7 +180,7 @@ namespace SRM_Connectivity_of_graphs
             return true;
         }
 
-        public static int[,] TransposeMatrix(this int[,] matrix)
+        public static int[,] GetTransposeMatrix(int[,] matrix)
         {
             var rows = matrix.GetLength(0);
             var cols = matrix.GetLength(1);
@@ -204,7 +204,7 @@ namespace SRM_Connectivity_of_graphs
 
         public static bool IsGraphUnilaterallyConnected(this int[,] matrix)
         {
-            var transponedMatrix = matrix.TransposeMatrix();
+            var transponedMatrix = GetTransposeMatrix(matrix);
             var sumMatrixWithTransponed = matrix.SumMatrix(transponedMatrix);
 
             SeparateStrings();
@@ -214,14 +214,14 @@ namespace SRM_Connectivity_of_graphs
 
             SeparateStrings();
 
-            sumMatrixWithTransponed.BooleanTransformation();
+            sumMatrixWithTransponed.BooleanTransform();
 
             return sumMatrixWithTransponed.IsMatrixEqualsToFullOnes();
         }
 
         public static bool IsGraphWeaklyConnected(this int[,] matrix)
         {
-            var transponedMatrix = matrix.TransposeMatrix();
+            var transponedMatrix = GetTransposeMatrix(matrix);
             var sumMatrixWithTransponed = matrix.SumMatrix(IdentityMatrix(matrix)).SumMatrix(transponedMatrix);
             var multipliedMatrix = sumMatrixWithTransponed.Power(matrix.GetLength(0) - 1);
 
@@ -235,7 +235,7 @@ namespace SRM_Connectivity_of_graphs
 
             SeparateStrings();
 
-            multipliedMatrix.BooleanTransformation();
+            multipliedMatrix.BooleanTransform();
 
             return multipliedMatrix.IsMatrixEqualsToFullOnes();
         }

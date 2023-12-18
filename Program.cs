@@ -35,18 +35,18 @@ Console.WriteLine("Початкова матриця: ".Pastel("#F8DDFA"));
 matrix.DrawMatrixInConsole();
 
 Console.WriteLine("\nТранспонована матриця: ".Pastel("#F8DDFA"));
-var transponedMatrix = matrix.TransposeMatrix();
+var transponedMatrix = MatrixExtension.GetTransposeMatrix(matrix);
 transponedMatrix.DrawMatrixInConsole();
 
 MatrixExtension.SeparateStrings();
 
-var resultMatrix = matrix.ReachabilityMatrix();
+var resultMatrix = MatrixExtension.GetReachabilityMatrix(matrix);
 Console.WriteLine("Матриця досяжностi: ".Pastel("#F8DDFA"));
 resultMatrix.DrawMatrixInConsole();
 
 MatrixExtension.SeparateStrings();
 
-var resultMatrixShort = matrix.ReachabilityMatrixShort();
+var resultMatrixShort = MatrixExtension.GetReachabilityMatrixShort(matrix);
 Console.WriteLine("[КОРОТКИЙ МЕТОД] Матриця досяжностi: ".Pastel("#F8DDFA"));
 resultMatrixShort.DrawMatrixInConsole();
 
