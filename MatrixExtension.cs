@@ -28,13 +28,22 @@ namespace SRM_Connectivity_of_graphs
             return identityMatrix;
         }
 
-        public static int[,] Power(this int[,] matrix, int power)
+        public static int[,] Power(this int[,] matrix, int power, bool flagShowLog = false)
         {
             if (power == 0) return new int[matrix.GetLength(0), matrix.GetLength(1)];
             if (power < 0) throw new ArgumentException("Power must be greater than or equal to 0.");
 
             var result = (int[,])matrix.Clone();
-            for (int i = 1; i < power; i++) result = MultiplyMatrices(result, matrix);
+            for (int i = 1; i < power; i++)
+            {
+                result = MultiplyMatrices(result, matrix);
+            }
+
+            if (flagShowLog)
+            {
+                Console.WriteLine($"\n[ МАТРИЦЯ У СТЕПЕНI {power} ]".Pastel("#F8DDFA"));
+                result.DrawMatrixInConsole();
+            }
 
             return result;
         }
@@ -64,12 +73,14 @@ namespace SRM_Connectivity_of_graphs
                 throw new ArgumentException("Matrix dimensions do not allow multiplication.");
             }
 
+            int temp = 0;
             var result = new int[firstRows, secondCols];
 
             for (int i = 0; i < firstRows; i++)
             {
                 for (int j = 0; j < secondCols; j++)
                 {
+                    result[i, j] = 0;
                     for (int k = 0; k < firstCols; k++)
                     {
                         result[i, j] += firstMatrix[i, k] * secondMatrix[k, j];
@@ -119,19 +130,10 @@ namespace SRM_Connectivity_of_graphs
             int[,] reachabilityMatrix = IdentityMatrix(matrix);
             int[,] temporaryMatrix = new int[size, size];
 
-            Console.WriteLine($"\n[ МАТРИЦЯ У СТЕПЕНI 1 ]".Pastel("#F8DDFA"));
-            matrix.DrawMatrixInConsole();
-
             for (int i = 1; i < size; i++)
             {
-                temporaryMatrix = reachabilityMatrix.SumMatrix(matrix.Power(i));
+                temporaryMatrix = reachabilityMatrix.SumMatrix(matrix.Power(i, true));
                 reachabilityMatrix = temporaryMatrix;
-
-                if (i > 1)
-                {
-                    Console.WriteLine($"\n[ МАТРИЦЯ У СТЕПЕНI {i} ]".Pastel("#F8DDFA"));
-                    reachabilityMatrix.DrawMatrixInConsole();
-                }
             }
 
             SeparateStrings();

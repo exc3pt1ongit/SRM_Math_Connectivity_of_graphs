@@ -1,38 +1,21 @@
 ﻿using Pastel;
 using SRM_Connectivity_of_graphs;
 
-// var matrix = new int[,]
-// { 
-//     { 0, 1, 0, 1, 0 }, 
-//     { 0, 0, 0, 0, 0 },
-//     { 1, 1, 0, 0, 0 },
-//     { 0, 0, 0, 0, 1 },
-//     { 0, 0, 0, 0, 0 }
-// };
-
-// var matrix = new int[,]
-// {
-//     { 0, 1, 1, 0 },
-//     { 1, 0, 1, 1 },
-//     { 0, 0, 0, 1 },
-//     { 0, 0, 0, 1 }
-// };
-
 var matrix = new int[,]
-{
-    { 0, 0, 0, 1, 0, 0, 0 },
-    { 0, 0, 1, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 1, 1, 0, 1, 0, 1 },
-    { 0, 0, 0, 0, 0, 1, 0 },
-    { 0, 0, 0, 1, 0, 0 ,0 },
-    { 0, 0, 0, 0, 0, 0, 0 }
+{ 
+    { 0, 1, 0, 1, 0 }, 
+    { 0, 0, 0, 0, 0 },
+    { 1, 1, 0, 0, 0 },
+    { 0, 0, 0, 0, 1 },
+    { 0, 0, 0, 0, 0 }
 };
 
 MatrixExtension.SeparateStrings();
 
 Console.WriteLine("Початкова матриця: ".Pastel("#F8DDFA"));
 matrix.DrawMatrixInConsole();
+
+Console.WriteLine();
 
 Console.WriteLine("\nТранспонована матриця: ".Pastel("#F8DDFA"));
 var transponedMatrix = MatrixExtension.GetTransposeMatrix(matrix);
